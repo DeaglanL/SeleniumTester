@@ -32,77 +32,41 @@ public class DemoSiteTest {
     {
         wD.navigate().to("http://thedemosite.co.uk/");
 
-        try {
-            TimeUnit.SECONDS.sleep(3);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Tools.wait(3);
 
 
-        wD.findElement(By.cssSelector("body > div > center > table > tbody > tr:nth-child(2) > td > div > center > table > tbody > tr > td:nth-child(2) > p > small > a:nth-child(6)")).click();
+        wD.findElement(By.cssSelector("tr td:nth-child(2) small a:nth-child(6)")).click();
 
-        try {
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Tools.wait(3);
 
 
         wD.findElement(By.cssSelector(" form  center table tr:nth-child(1) td:nth-child(2) input")).sendKeys("abcd");
 
-        try {
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Tools.wait(3);
 
         wD.findElement(By.cssSelector("form center table td:nth-child(2) input[type=\"password\"]")).sendKeys("abcd");
 
-        try {
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Tools.wait(3);
 
         wD.findElement(By.cssSelector("form center tr:nth-child(3) td:nth-child(2) input[type=\"button\"]")).click();
 
-        try {
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Tools.wait(3);
 
         wD.findElement(By.cssSelector("center tr:nth-child(2) td:nth-child(2) a:nth-child(7)")).click();
 
-        try {
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Tools.wait(3);
 
         wD.findElement(By.cssSelector("form center td:nth-child(1) tr:nth-child(1) td:nth-child(2) input")).sendKeys("abcd");
 
-        try {
-            TimeUnit.SECONDS.sleep(3);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Tools.wait(3);
 
         wD.findElement(By.cssSelector("form center td:nth-child(1) tr:nth-child(2) td:nth-child(2) input[type=\"password\"]")).sendKeys("abcd");
 
-        try {
-            TimeUnit.SECONDS.sleep(3);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Tools.wait(3);
 
         wD.findElement(By.cssSelector("form center td:nth-child(1) tr:nth-child(3)  td:nth-child(2) input[type=\"button\"]")).click();
 
-        try {
-            TimeUnit.SECONDS.sleep(3);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Tools.wait(3);
 
         assertEquals("login failed", "**Successful Login**", wD.findElement(By.cssSelector("tr  td.auto-style1 big blockquote blockquote font center b")).getText());
 
