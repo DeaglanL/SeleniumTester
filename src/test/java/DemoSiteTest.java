@@ -48,7 +48,7 @@ public class DemoSiteTest {
         }
 
 
-        wD.findElement(By.cssSelector("body > table > tbody > tr > td.auto-style1 > form > div > center > table > tbody > tr > td:nth-child(1) > div > center > table > tbody > tr:nth-child(1) > td:nth-child(2) > p > input")).sendKeys("abcd");
+        wD.findElement(By.cssSelector(" form  center table tr:nth-child(1) td:nth-child(2) input")).sendKeys("abcd");
 
         try {
             TimeUnit.SECONDS.sleep(2);
@@ -56,7 +56,7 @@ public class DemoSiteTest {
             e.printStackTrace();
         }
 
-        wD.findElement(By.cssSelector("body > table > tbody > tr > td.auto-style1 > form > div > center > table > tbody > tr > td:nth-child(1) > div > center > table > tbody > tr:nth-child(2) > td:nth-child(2) > p > input[type=\"password\"]")).sendKeys("abcd");
+        wD.findElement(By.cssSelector("form center table td:nth-child(2) input[type=\"password\"]")).sendKeys("abcd");
 
         try {
             TimeUnit.SECONDS.sleep(2);
@@ -64,7 +64,7 @@ public class DemoSiteTest {
             e.printStackTrace();
         }
 
-        wD.findElement(By.cssSelector("body > table > tbody > tr > td.auto-style1 > form > div > center > table > tbody > tr > td:nth-child(1) > div > center > table > tbody > tr:nth-child(3) > td:nth-child(2) > p > input[type=\"button\"]")).click();
+        wD.findElement(By.cssSelector("form center tr:nth-child(3) td:nth-child(2) input[type=\"button\"]")).click();
 
         try {
             TimeUnit.SECONDS.sleep(2);
@@ -72,7 +72,7 @@ public class DemoSiteTest {
             e.printStackTrace();
         }
 
-        wD.findElement(By.cssSelector("body > div > center > table > tbody > tr:nth-child(2) > td > div > center > table > tbody > tr > td:nth-child(2) > p > small > a:nth-child(7)")).click();
+        wD.findElement(By.cssSelector("center tr:nth-child(2) td:nth-child(2) a:nth-child(7)")).click();
 
         try {
             TimeUnit.SECONDS.sleep(2);
@@ -80,7 +80,7 @@ public class DemoSiteTest {
             e.printStackTrace();
         }
 
-        wD.findElement(By.cssSelector("body > table > tbody > tr > td.auto-style1 > form > div > center > table > tbody > tr > td:nth-child(1) > table > tbody > tr:nth-child(1) > td:nth-child(2) > p > input")).sendKeys("abcd");
+        wD.findElement(By.cssSelector("form center td:nth-child(1) tr:nth-child(1) td:nth-child(2) input")).sendKeys("abcd");
 
         try {
             TimeUnit.SECONDS.sleep(3);
@@ -88,7 +88,7 @@ public class DemoSiteTest {
             e.printStackTrace();
         }
 
-        wD.findElement(By.cssSelector("body > table > tbody > tr > td.auto-style1 > form > div > center > table > tbody > tr > td:nth-child(1) > table > tbody > tr:nth-child(2) > td:nth-child(2) > p > input[type=\"password\"]")).sendKeys("abcd");
+        wD.findElement(By.cssSelector("form center td:nth-child(1) tr:nth-child(2) td:nth-child(2) input[type=\"password\"]")).sendKeys("abcd");
 
         try {
             TimeUnit.SECONDS.sleep(3);
@@ -96,7 +96,7 @@ public class DemoSiteTest {
             e.printStackTrace();
         }
 
-        wD.findElement(By.cssSelector("body > table > tbody > tr > td.auto-style1 > form > div > center > table > tbody > tr > td:nth-child(1) > table > tbody > tr:nth-child(3) > td:nth-child(2) > p > input[type=\"button\"]")).click();
+        wD.findElement(By.cssSelector("form center td:nth-child(1) tr:nth-child(3)  td:nth-child(2) input[type=\"button\"]")).click();
 
         try {
             TimeUnit.SECONDS.sleep(3);
@@ -104,7 +104,7 @@ public class DemoSiteTest {
             e.printStackTrace();
         }
 
-        assertEquals("login failed", "**Successful Login**", wD.findElement(By.cssSelector("body > table > tbody > tr > td.auto-style1 > big > blockquote > blockquote > font > center > b")).getText());
+        assertEquals("login failed", "**Successful Login**", wD.findElement(By.cssSelector("tr  td.auto-style1 big blockquote blockquote font center b")).getText());
 
 
     }
