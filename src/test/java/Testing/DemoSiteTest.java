@@ -1,8 +1,10 @@
 package Testing;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import org.junit.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,9 +16,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import pages.*;
 
-import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
+import java.io.IOException;
+
 
 public class DemoSiteTest {
 
@@ -26,9 +27,28 @@ public class DemoSiteTest {
     private LogInPage logIn;
     private AddAUser addUser;
 
+
+    private ExtentReports report;
+    private ExtentTest test;
+    private String reportFilePath = "report.html";
+
+    @BeforeClass
+    public static void beforeClass()
+    {
+
+    }
+
     @Before
     public void beforeTest()
     {
+
+        report = new ExtentReports();
+        ExtentHtmlReporter extentHtmlReporter = new ExtentHtmlReporter(reportFilePath);
+        extentHtmlReporter.config().setReportName("The demo site test report");
+        extentHtmlReporter.config().setDocumentTitle("The demo site test report");
+        report.attachReporter(extentHtmlReporter);
+        test = report.createTest("Login test");
+
         System.out.println("Before test");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--start-maximized");
@@ -69,7 +89,21 @@ public class DemoSiteTest {
 
         logIn.clickEnter(wD);
 
-    assertEquals("login failed", "**Successful Login**", logIn.getLoginStateText(wD));
+        test.log(Status.INFO, "Info level");
+        test.fail("Failed");
+
+        try {
+            test.log(Status.INFO,
+                    "Error Snapshot : " + test.addScreenCaptureFromPath(ScreenShot.take(wD, "test")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        assertEquals("login failed", "**Successful Login**", logIn.getLoginStateText(wD));
+
+
+
 
 
 }
@@ -80,9 +114,18 @@ public class DemoSiteTest {
     public void afterTest()
     {
         wD.quit();
+        report.flush();
+
 
     }
 
 
+    @AfterClass
+    public static void afterClass()
+    {
+
+
+
+    }
 
 }

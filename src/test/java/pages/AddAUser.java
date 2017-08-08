@@ -11,9 +11,9 @@ import org.openqa.selenium.support.ui.Wait;
 import java.util.function.Function;
 
 
-public class AddAUser {
+    public class AddAUser {
 
-    Tools t = new Tools();
+        Tools t = new Tools();
 
     @FindBy(css = "center tr:nth-child(2) td:nth-child(2) a:nth-child(7)")
     private WebElement loginPageButton;
