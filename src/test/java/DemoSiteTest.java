@@ -6,25 +6,30 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
+import org.openqa.selenium.support.PageFactory;
+import pages.*;
 
 public class DemoSiteTest {
 
     private WebDriver wD;
+    private Homepage homepage;
+    private LogInPage logIn;
+    private AddAUser addUser;
 
     @Before
     public void beforeTest()
     {
         System.out.println("Before test");
-
-
-
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--start-maximized");
         wD = new ChromeDriver(chromeOptions);
+
+        homepage = PageFactory.initElements(wD,Homepage.class);
+        logIn = PageFactory.initElements(wD,LogInPage.class);
+        addUser = PageFactory.initElements(wD,AddAUser.class);
     }
 
     @Test
@@ -34,44 +39,42 @@ public class DemoSiteTest {
 
         Tools.wait(3);
 
-
-        wD.findElement(By.cssSelector("tr td:nth-child(2) small a:nth-child(6)")).click();
-
-        Tools.wait(3);
-
-
-        wD.findElement(By.cssSelector(" form  center table tr:nth-child(1) td:nth-child(2) input")).sendKeys("abcd");
+        homepage.clickLoginPage();
 
         Tools.wait(3);
 
-        wD.findElement(By.cssSelector("form center table td:nth-child(2) input[type=\"password\"]")).sendKeys("abcd");
+        addUser.enterUserName("abcd");
 
         Tools.wait(3);
 
-        wD.findElement(By.cssSelector("form center tr:nth-child(3) td:nth-child(2) input[type=\"button\"]")).click();
+        addUser.enterPassword("abcd");
 
         Tools.wait(3);
 
-        wD.findElement(By.cssSelector("center tr:nth-child(2) td:nth-child(2) a:nth-child(7)")).click();
+        addUser.clickEnterButton();
 
         Tools.wait(3);
 
-        wD.findElement(By.cssSelector("form center td:nth-child(1) tr:nth-child(1) td:nth-child(2) input")).sendKeys("abcd");
+        addUser.clickLoginPageButton();
 
         Tools.wait(3);
 
-        wD.findElement(By.cssSelector("form center td:nth-child(1) tr:nth-child(2) td:nth-child(2) input[type=\"password\"]")).sendKeys("abcd");
+        logIn.enterUserName("abcd");
 
         Tools.wait(3);
 
-        wD.findElement(By.cssSelector("form center td:nth-child(1) tr:nth-child(3)  td:nth-child(2) input[type=\"button\"]")).click();
+        logIn.enterPassword("abcd");
 
         Tools.wait(3);
 
-        assertEquals("login failed", "**Successful Login**", wD.findElement(By.cssSelector("tr  td.auto-style1 big blockquote blockquote font center b")).getText());
+        logIn.clickEnter();
+
+        Tools.wait(3);
+
+    assertEquals("login failed", "**Successful Login**", logIn.getLoginStateText());
 
 
-    }
+}
 
     @After
     public void afterTest()
@@ -79,5 +82,7 @@ public class DemoSiteTest {
         wD.quit();
 
     }
+
+
 
 }
