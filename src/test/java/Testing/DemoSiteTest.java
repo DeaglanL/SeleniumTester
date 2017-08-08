@@ -1,7 +1,8 @@
+package Testing;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -10,11 +11,17 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import static org.junit.Assert.assertEquals;
 
 import org.openqa.selenium.support.PageFactory;
+
 import pages.*;
+
+import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 public class DemoSiteTest {
 
     private WebDriver wD;
+
     private Homepage homepage;
     private LogInPage logIn;
     private AddAUser addUser;
@@ -27,54 +34,47 @@ public class DemoSiteTest {
         chromeOptions.addArguments("--start-maximized");
         wD = new ChromeDriver(chromeOptions);
 
+
         homepage = PageFactory.initElements(wD,Homepage.class);
         logIn = PageFactory.initElements(wD,LogInPage.class);
         addUser = PageFactory.initElements(wD,AddAUser.class);
+
+
     }
 
     @Test
     public void test()
     {
+
+
+
+
+        String userNameAndPass = "783huu";
+
         wD.navigate().to("http://thedemosite.co.uk/");
 
-        Tools.wait(3);
+        homepage.clickLoginPage(wD);
 
-        homepage.clickLoginPage();
+        addUser.enterUserName(userNameAndPass , wD);
 
-        Tools.wait(3);
+        addUser.enterPassword(userNameAndPass, wD);
 
-        addUser.enterUserName("abcd");
+        addUser.clickEnterButton(wD);
 
-        Tools.wait(3);
+        addUser.clickLoginPageButton(wD);
 
-        addUser.enterPassword("abcd");
+        logIn.enterUserName(userNameAndPass, wD);
 
-        Tools.wait(3);
+        logIn.enterPassword(userNameAndPass, wD);
 
-        addUser.clickEnterButton();
+        logIn.clickEnter(wD);
 
-        Tools.wait(3);
-
-        addUser.clickLoginPageButton();
-
-        Tools.wait(3);
-
-        logIn.enterUserName("abcd");
-
-        Tools.wait(3);
-
-        logIn.enterPassword("abcd");
-
-        Tools.wait(3);
-
-        logIn.clickEnter();
-
-        Tools.wait(3);
-
-    assertEquals("login failed", "**Successful Login**", logIn.getLoginStateText());
+    assertEquals("login failed", "**Successful Login**", logIn.getLoginStateText(wD));
 
 
 }
+
+
 
     @After
     public void afterTest()
